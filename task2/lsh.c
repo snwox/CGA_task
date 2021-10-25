@@ -35,7 +35,7 @@ int lsh_exit(char **args)
 void INThandler(int sig){
   if(pid){
     kill(pid,SIGTERM);
-    puts("");
+    puts("\n");
     pid=0;
   }else{
     exit(EXIT_FAILURE);
