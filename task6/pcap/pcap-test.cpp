@@ -14,6 +14,12 @@
 #include <unistd.h>
 #include <string.h>
 
+void usage()
+{
+	printf("syntax: pcap-test <interface>\n");
+	printf("sample: pcap-test wlan0\n");
+}
+
 typedef struct
 {
 	char *dev_;
@@ -24,8 +30,13 @@ Param param = {
 
 int main(int argc, char *argv[])
 {
+	if (argc != 2)
+	{
+		usage();
+		exit(0);
+	}
 
-	param.dev_ = "enp1s0"; // change this
+	param.dev_ = argv[1];
 
 	char errbuf[PCAP_ERRBUF_SIZE];
 	pcap_t *pcap = pcap_open_live(param.dev_, BUFSIZ, 1, 1000, errbuf);
